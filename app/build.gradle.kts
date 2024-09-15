@@ -4,6 +4,7 @@ plugins {
 
     alias(libs.plugins.hilt)
     alias(libs.plugins.kotlinKsp)
+    alias(libs.plugins.serialization)
 }
 
 android {
@@ -39,6 +40,9 @@ android {
     buildFeatures {
         viewBinding = true
     }
+//    ksp {
+//        arg("room.schemaLocation", "$projectDir/schemas")
+//    }
 }
 
 dependencies {
@@ -63,4 +67,14 @@ dependencies {
 
     implementation (libs.converter.moshi)
     implementation (libs.moshi)
+    implementation(libs.moshi.kotlin)
+
+    implementation(libs.room.ktx)
+    ksp(libs.room.compiler)
+    implementation(libs.androidx.datastore.preferences.core)
+
+    implementation(libs.kotlinx.datetime)
+    implementation(libs.gson)
+
+    implementation (libs.kotlinx.serialization.json)
 }

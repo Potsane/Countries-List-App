@@ -1,10 +1,16 @@
 package com.example.myapplication.data.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity
 data class Country(
-    var name: CountryName? = CountryName(),
+    @PrimaryKey
+    var commonName: String = "",
+    var officialName: String? = "",
     var independent: Boolean? = false,
     var isUnMember: Boolean? = false,
-    var currencies: MutableList<CountryCurrency> = mutableListOf(),
+    var currencies: MutableList<String> = mutableListOf(),
     var capitalCities: MutableList<String> = mutableListOf(),
     var region: String? = "",
     var subregion: String? = "",
@@ -15,17 +21,7 @@ data class Country(
     var population: Long? = 0L,
     var timezones: MutableList<String> = mutableListOf(),
     var continents: MutableList<String> = mutableListOf(),
-    var flags: MutableList<Pair<String, String>> = mutableListOf(),
-    var coatOfArms: MutableList<Pair<String, String>> = mutableListOf(),
+    var flagImageUrl: String? = "",
+    var coatOfArms: String? = "",
     var startOfWeek: String? = "",
-)
-
-data class CountryCurrency(
-    var name: String? = "",
-    var symbol: String? = "",
-)
-
-data class CountryName(
-    var common: String? = "",
-    var official: String? = ""
 )

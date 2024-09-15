@@ -3,8 +3,6 @@ package com.example.myapplication.data.remote.adapter
 import android.annotation.SuppressLint
 import com.example.myapplication.data.model.CountriesResponse
 import com.example.myapplication.data.model.Country
-import com.example.myapplication.data.model.CountryCurrency
-import com.example.myapplication.data.model.CountryName
 import com.squareup.moshi.FromJson
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.JsonReader
@@ -34,19 +32,18 @@ class CountryDataJasonAdapter : JsonAdapter<CountriesResponse>() {
                 val key = reader.nextName()
                 when (key) {
                     "name" -> {
-                        val countryName = CountryName()
                         reader.beginObject()
                         while (reader.hasNext()) {
                             val nameKey = reader.nextName()
                             when (nameKey) {
-                                "common" -> countryName.common = reader.nextString()
-                                "official" -> countryName.official = reader.nextString()
+                                "common" -> country.commonName = reader.nextString()
+                                "official" -> country.officialName = reader.nextString()
                                 else -> reader.skipValue()
                             }
                         }
-                        country.name = countryName
                         reader.endObject()
                     }
+
                     "languages" -> {
                         reader.beginObject()
                         while (reader.hasNext()) {
@@ -55,6 +52,7 @@ class CountryDataJasonAdapter : JsonAdapter<CountriesResponse>() {
                         }
                         reader.endObject()
                     }
+
                     "independent" -> country.independent = reader.nextBoolean()
                     "unMember" -> country.isUnMember = reader.nextBoolean()
                     "landlocked" -> country.isLandlocked = reader.nextBoolean()
@@ -63,7 +61,6 @@ class CountryDataJasonAdapter : JsonAdapter<CountriesResponse>() {
                     "startOfWeek" -> country.startOfWeek = reader.nextString()
                     "region" -> country.region = reader.nextString()
                     "currencies" -> {
-                        val countryCurrency = CountryCurrency()
                         reader.beginObject()
                         while (reader.hasNext()) {
                             reader.nextName()
@@ -71,15 +68,15 @@ class CountryDataJasonAdapter : JsonAdapter<CountriesResponse>() {
                             while (reader.hasNext()) {
                                 val currencyKey = reader.nextName()
                                 when (currencyKey) {
-                                    "name" -> countryCurrency.name = reader.nextString()
-                                    "symbol" -> countryCurrency.symbol = reader.nextString()
+                                    "name" -> country.currencies.add(reader.nextString())
+                                    else -> reader.skipValue()
                                 }
                             }
                             reader.endObject()
                         }
-                        country.currencies.add(countryCurrency)
                         reader.endObject()
                     }
+
                     "capital" -> {
                         reader.beginArray()
                         while (reader.hasNext()) {
@@ -103,6 +100,7 @@ class CountryDataJasonAdapter : JsonAdapter<CountriesResponse>() {
                         }
                         reader.endArray()
                     }
+
                     "continents" -> {
                         reader.beginArray()
                         while (reader.hasNext()) {
@@ -110,11 +108,15 @@ class CountryDataJasonAdapter : JsonAdapter<CountriesResponse>() {
                         }
                         reader.endArray()
                     }
+
                     "flags" -> {
                         reader.beginObject()
                         while (reader.hasNext()) {
-                            val flag = Pair(reader.nextName(), reader.nextString())
-                            country.flags.add(flag)
+                            val flagKey = reader.nextName()
+                            when (flagKey) {
+                                "png" -> country.flagImageUrl = reader.nextString()
+                                else -> reader.skipValue()
+                            }
                         }
                         reader.endObject()
                     }
