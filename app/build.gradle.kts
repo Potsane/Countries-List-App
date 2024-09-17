@@ -1,10 +1,12 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-
+    alias(libs.plugins.kotlin.parcelize)
     alias(libs.plugins.hilt)
     alias(libs.plugins.kotlinKsp)
     alias(libs.plugins.serialization)
+    alias(libs.plugins.org.jetbrains.kotlin.kapt)
+    alias(libs.plugins.androidx.navigation.safeargs)
 }
 
 android {
@@ -39,10 +41,8 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        dataBinding = true
     }
-//    ksp {
-//        arg("room.schemaLocation", "$projectDir/schemas")
-//    }
 }
 
 dependencies {
@@ -57,7 +57,6 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-
     implementation(libs.retrofit)
     implementation(libs.okhttp)
     implementation(libs.logging.interceptor)
@@ -65,8 +64,8 @@ dependencies {
     implementation(libs.hilt)
     ksp(libs.hilt.compiler)
 
-    implementation (libs.converter.moshi)
-    implementation (libs.moshi)
+    implementation(libs.converter.moshi)
+    implementation(libs.moshi)
     implementation(libs.moshi.kotlin)
 
     implementation(libs.room.ktx)
@@ -76,5 +75,11 @@ dependencies {
     implementation(libs.kotlinx.datetime)
     implementation(libs.gson)
 
-    implementation (libs.kotlinx.serialization.json)
+    implementation(libs.kotlinx.serialization.json)
+
+    implementation(libs.glide)
+    ksp(libs.glide.ksp)
+
+    implementation (libs.androidx.recyclerview)
+    implementation (libs.androidx.swiperefreshlayout)
 }

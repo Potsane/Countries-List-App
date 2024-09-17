@@ -7,4 +7,7 @@ plugins {
     alias(libs.plugins.hilt) apply false
     alias(libs.plugins.kotlinKsp) apply false
     alias(libs.plugins.serialization) apply false
+    alias(libs.plugins.org.jetbrains.kotlin.kapt) apply false
+    alias(libs.plugins.androidx.navigation.safeargs) apply false
+    alias(libs.plugins.kotlin.parcelize) apply false
 }
