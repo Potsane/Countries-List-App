@@ -21,12 +21,10 @@ class CountryListFragment :
     private var networkMonitor: NetworkMonitor? = null
     private val networkCallback = object : ConnectivityManager.NetworkCallback() {
         override fun onAvailable(network: Network) {
-            println("=============== $network")
             viewModel.isNetworkAvailable = true
         }
 
         override fun onLost(network: Network) {
-            println("=============== $network")
             viewModel.isNetworkAvailable = false
         }
     }

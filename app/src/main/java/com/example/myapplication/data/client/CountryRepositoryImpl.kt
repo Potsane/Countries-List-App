@@ -31,11 +31,11 @@ class CountryRepositoryImpl @Inject constructor(
         withContext(Dispatchers.IO) {
             try {
                 val countries: List<Country> = when {
-                    !canFullFillRequest(isNetworkAvailable) -> {
+                    cantFullFillRequest(isNetworkAvailable) -> {
                         launch(Dispatchers.Main) { onError(Result.Error(AppError.NotConnected)) }
                         return@withContext
                     }
-                    forceRefresh || isLocalProductDataOutdated() -> getDataFromApiService()
+                    shouldFetchDataFromApiService(forceRefresh, isNetworkAvailable) -> getDataFromApiService()
                     else -> getDataFromDatabase()
                 }
                 launch(Dispatchers.Main) { onSuccess(Result.Success(countries)) }
@@ -96,7 +96,12 @@ class CountryRepositoryImpl @Inject constructor(
         dataStore.setCountriesPersistenceTimeStamp(currentTime)
     }
 
-    private suspend fun canFullFillRequest(isNetworkAvailable: Boolean): Boolean {
-        return isNetworkAvailable && !countryDao.isEmpty()
+    private suspend fun shouldFetchDataFromApiService(
+        forceRefresh: Boolean,
+        isNetworkAvailable: Boolean
+    ) = isNetworkAvailable && (forceRefresh || isLocalProductDataOutdated())
+
+    private suspend fun cantFullFillRequest(isNetworkAvailable: Boolean): Boolean {
+        return !isNetworkAvailable && countryDao.isEmpty()
     }
 }
