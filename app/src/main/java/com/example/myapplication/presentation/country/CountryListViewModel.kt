@@ -15,15 +15,29 @@ class CountryListViewModel @Inject constructor(
     private val repository: CountryRepository
 ) : CountriesAppBaseViewModel(), CountryCardClickListener {
 
+    var isNetworkAvailable = true
     val searchQuery = MutableLiveData("")
+    var showError = MutableLiveData(false)
     private var unfilteredList = mutableListOf<Country>()
     private val _countries = MutableLiveData<MutableList<Country>>()
     val countries: LiveData<MutableList<Country>> = _countries
 
-    fun getCountryList() = withProgress {
-        repository.getCountryList(
-            onSuccess = { handleCountriesListResult(it) }
-        ) { }
+    fun getCountryList(
+        isNetworkAvailable: Boolean,
+        forceRefresh: Boolean = false
+    ) {
+        if (forceRefresh && !isNetworkAvailable) {
+            showError.value = true
+            return
+        }
+        withProgress {
+            repository.getCountryList(
+                isNetworkAvailable = isNetworkAvailable,
+                forceRefresh = forceRefresh,
+                onSuccess = { handleCountriesListResult(it) },
+                onError = { showError.value = true }
+            )
+        }
     }
 
     private fun handleCountriesListResult(result: Result<List<Country>>) {
@@ -42,7 +56,7 @@ class CountryListViewModel @Inject constructor(
 
     fun onRefresh(onRefreshComplete: () -> Unit) {
         searchQuery.value = ""
-        getCountryList()
+        getCountryList(forceRefresh = true, isNetworkAvailable = isNetworkAvailable)
         onRefreshComplete()
     }
 
@@ -51,6 +65,11 @@ class CountryListViewModel @Inject constructor(
             it.commonName.contains(query, true)
         }
         _countries.value = filteredList.toMutableList()
+    }
+
+    fun onTryAgain() {
+        showError.value = false
+        getCountryList(isNetworkAvailable)
     }
 
     override fun onCardClick(country: Country) {
