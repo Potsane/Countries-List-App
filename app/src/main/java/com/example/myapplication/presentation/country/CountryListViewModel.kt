@@ -18,7 +18,7 @@ class CountryListViewModel @Inject constructor(
     var isNetworkAvailable = true
     val searchQuery = MutableLiveData("")
     var showError = MutableLiveData(false)
-    private var unfilteredList = mutableListOf<Country>()
+    private var unfilteredList = listOf<Country>()
     private val _countries = MutableLiveData<MutableList<Country>>()
     val countries: LiveData<MutableList<Country>> = _countries
 
@@ -26,36 +26,27 @@ class CountryListViewModel @Inject constructor(
         isNetworkAvailable: Boolean,
         forceRefresh: Boolean = false
     ) {
-        if (forceRefresh && !isNetworkAvailable) {
-            showError.value = true
-            return
+        searchQuery.value = ""
+        when {
+            forceRefresh && !isNetworkAvailable -> {
+                showError.value = true
+                return
+            }
+            unfilteredList.isNotEmpty() && !forceRefresh -> initializeList(unfilteredList)
+            else -> {
+                withProgress {
+                    repository.getCountryList(
+                        isNetworkAvailable = isNetworkAvailable,
+                        forceRefresh = forceRefresh,
+                        onSuccess = { handleCountriesListResult(it) },
+                        onError = { showError.value = true }
+                    )
+                }
+            }
         }
-        withProgress {
-            repository.getCountryList(
-                isNetworkAvailable = isNetworkAvailable,
-                forceRefresh = forceRefresh,
-                onSuccess = { handleCountriesListResult(it) },
-                onError = { showError.value = true }
-            )
-        }
-    }
-
-    private fun handleCountriesListResult(result: Result<List<Country>>) {
-        val countries = (result as Result.Success).data
-        unfilteredList = countries.sortedBy { it.commonName }.toMutableList()
-        finalizeList(unfilteredList)
-    }
-
-    private fun finalizeList(countries: MutableList<Country>) {
-        searchQuery.value?.takeIf { it.isNotEmpty() }?.let { query ->
-            _countries.value = countries
-                .filter { it.commonName.contains(query) }
-                .toMutableList()
-        } ?: run { _countries.value = countries }
     }
 
     fun onRefresh(onRefreshComplete: () -> Unit) {
-        searchQuery.value = ""
         getCountryList(forceRefresh = true, isNetworkAvailable = isNetworkAvailable)
         onRefreshComplete()
     }
@@ -72,7 +63,15 @@ class CountryListViewModel @Inject constructor(
         getCountryList(isNetworkAvailable)
     }
 
-    override fun onCardClick(country: Country) {
-        navigate(CountryListFragmentDirections.listToDetail(country))
+    private fun handleCountriesListResult(result: Result<List<Country>>) {
+        val countries = (result as Result.Success).data
+        unfilteredList = countries.sortedBy { it.commonName }
+        initializeList(unfilteredList)
     }
+
+    private fun initializeList(countries: List<Country>) {
+        _countries.value = countries.toMutableList()
+    }
+
+    override fun onCardClick(country: Country) = navigate(CountryListFragmentDirections.listToDetail(country))
 }

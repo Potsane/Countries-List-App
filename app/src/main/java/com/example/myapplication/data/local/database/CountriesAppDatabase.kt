@@ -7,7 +7,7 @@ import com.example.myapplication.data.model.Country
 
 @Database(
     entities = [Country::class],
-    version = 1,
+    version = 4,
     exportSchema = false
 )
 @TypeConverters(CountriesAppEntityConverter::class)

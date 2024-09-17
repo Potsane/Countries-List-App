@@ -37,7 +37,6 @@ class CountryDataJasonAdapter : JsonAdapter<CountriesResponse>() {
                             val nameKey = reader.nextName()
                             when (nameKey) {
                                 "common" -> country.commonName = reader.nextString()
-                                "official" -> country.officialName = reader.nextString()
                                 else -> reader.skipValue()
                             }
                         }
@@ -53,13 +52,8 @@ class CountryDataJasonAdapter : JsonAdapter<CountriesResponse>() {
                         reader.endObject()
                     }
 
-                    "independent" -> country.independent = reader.nextBoolean()
-                    "unMember" -> country.isUnMember = reader.nextBoolean()
-                    "landlocked" -> country.isLandlocked = reader.nextBoolean()
                     "area" -> country.area = reader.nextDouble()
                     "population" -> country.population = reader.nextLong()
-                    "startOfWeek" -> country.startOfWeek = reader.nextString()
-                    "region" -> country.region = reader.nextString()
                     "currencies" -> {
                         reader.beginObject()
                         while (reader.hasNext()) {
@@ -81,14 +75,6 @@ class CountryDataJasonAdapter : JsonAdapter<CountriesResponse>() {
                         reader.beginArray()
                         while (reader.hasNext()) {
                             country.capitalCities.add(reader.nextString())
-                        }
-                        reader.endArray()
-                    }
-
-                    "latlng" -> {
-                        reader.beginArray()
-                        while (reader.hasNext()) {
-                            country.latlng.add(reader.nextDouble())
                         }
                         reader.endArray()
                     }
