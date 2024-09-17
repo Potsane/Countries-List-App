@@ -45,22 +45,6 @@ class CountryRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun searchCountry(
-        onSuccess: (result: Result<List<Country>>) -> Unit,
-        onError: (result: Result<AppError>) -> Unit
-    ) {
-        try {
-            val countries = countryDao.getAllItems()
-            if (countries.isNullOrEmpty()) {
-                onError(Result.Error(AppError.EmptyResponse))
-            } else {
-                onSuccess(Result.Success(countries))
-            }
-        } catch (exception: Exception) {
-            onError(Result.Error(AppError.EmptyResponse))
-        }
-    }
-
     private suspend fun getDataFromApiService(): List<Country> {
         try {
             val countries = apiService.getCountriesList().body()?.countries
