@@ -1,9 +1,12 @@
 package com.example.myapplication.data.model
 
+import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlinx.parcelize.Parcelize
 
 @Entity
+@Parcelize
 data class Country(
     @PrimaryKey
     var commonName: String = "",
@@ -24,4 +27,4 @@ data class Country(
     var flagImageUrl: String? = "",
     var coatOfArms: String? = "",
     var startOfWeek: String? = "",
-)
+) : Parcelable

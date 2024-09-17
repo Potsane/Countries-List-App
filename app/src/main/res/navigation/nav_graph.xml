@@ -3,26 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/CountryListFragment">
 
     <fragment
-        android:id="@+id/FirstFragment"
-        android:name="com.example.myapplication.presentation.FirstFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
-
+        android:id="@+id/CountryListFragment"
+        android:name="com.example.myapplication.presentation.country.CountryListFragment"
+        tools:layout="@layout/fragment_country_list">
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            android:id="@+id/list_to_detail"
+            app:destination="@id/CountryDetailsFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/SecondFragment"
-        android:name="com.example.myapplication.presentation.SecondFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
 
+    <fragment
+        android:id="@+id/CountryDetailsFragment"
+        android:name="com.example.myapplication.presentation.country.CountryDetailsFragment"
+        tools:layout="@layout/fragment_country_details">
         <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            android:id="@+id/action_CountryDetailsFragment_to_CountryListFragment"
+            app:destination="@id/CountryListFragment" />
+        <argument
+            android:name="country"
+            app:argType="com.example.myapplication.data.model.Country" />
     </fragment>
 </navigation>

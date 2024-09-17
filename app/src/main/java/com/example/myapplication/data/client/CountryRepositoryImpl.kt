@@ -6,8 +6,9 @@ import com.example.myapplication.data.model.Country
 import com.example.myapplication.data.remote.CountryApiService
 import com.example.myapplication.domain.model.AppError
 import com.example.myapplication.domain.model.Result
-import com.example.myapplication.domain.repository.PokemonRepository
+import com.example.myapplication.domain.repository.CountryRepository
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import kotlinx.datetime.Clock
@@ -15,13 +16,13 @@ import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.Instant
 import kotlinx.datetime.until
 
-class PokemonRepositoryImpl @Inject constructor(
+class CountryRepositoryImpl @Inject constructor(
     private val apiService: CountryApiService,
     private val countryDao: CountryDao,
     private val dataStore: CountriesAppDataStore,
-) : PokemonRepository {
+) : CountryRepository {
 
-    override suspend fun getPokemonList(
+    override suspend fun getCountryList(
         forceRefresh: Boolean,
         onSuccess: (result: Result<List<Country>>) -> Unit,
         onError: (result: Result<AppError>) -> Unit
@@ -31,9 +32,9 @@ class PokemonRepositoryImpl @Inject constructor(
                 val countries =
                     if (forceRefresh || isLocalProductDataOutdated()) getDataFromApiService()
                     else getDataFromDatabase()
-                onSuccess(Result.Success(countries))
+                launch(Dispatchers.Main) { onSuccess(Result.Success(countries)) }
             } catch (error: AppError) {
-                onError(Result.Error(error))
+                launch(Dispatchers.Main) { onError(Result.Error(error)) }
             }
         }
     }
