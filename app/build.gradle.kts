@@ -33,12 +33,13 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "11"
     }
+
     buildFeatures {
         viewBinding = true
         dataBinding = true
@@ -46,7 +47,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -84,4 +84,13 @@ dependencies {
     implementation (libs.androidx.swiperefreshlayout)
 
     implementation(libs.lottie)
+
+    testImplementation(libs.core.testing)
+    testImplementation(libs.kotlinx.coroutines.test)
+    implementation(libs.mockito.core)
+    implementation(libs.mockito.kotlin)
+    implementation(libs.nhaarman.mockito.kotlin)
+
+    testImplementation(libs.powermock.module.junit4)
+    testImplementation (libs.powermock.api.mockito2)
 }

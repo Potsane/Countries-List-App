@@ -12,9 +12,4 @@ interface CountryRepository {
         onSuccess: (result: Result<List<Country>>) -> Unit,
         onError: (result: Result<AppError>) -> Unit
     )
-
-    suspend fun searchCountry(
-        onSuccess: (result: Result<List<Country>>) -> Unit,
-        onError: (result: Result<AppError>) -> Unit
-    )
 }
