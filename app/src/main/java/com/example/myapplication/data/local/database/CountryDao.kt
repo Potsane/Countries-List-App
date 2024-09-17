@@ -16,8 +16,8 @@ interface CountryDao {
     @Query("DELETE FROM Country")
     suspend fun delete()
 
-    @Query("SELECT * FROM Country WHERE commonName LIKE '%' || :searchQuery || '%'")
-    suspend fun searchCountry(searchQuery: String?): List<Country>
+    @Query("SELECT (SELECT COUNT(*) FROM Country) == 0")
+    suspend fun isEmpty(): Boolean
 
     suspend fun clearAndInsert(products: List<Country>) {
         delete()

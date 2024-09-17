@@ -23,15 +23,21 @@ class CountryRepositoryImpl @Inject constructor(
 ) : CountryRepository {
 
     override suspend fun getCountryList(
+        isNetworkAvailable: Boolean,
         forceRefresh: Boolean,
         onSuccess: (result: Result<List<Country>>) -> Unit,
         onError: (result: Result<AppError>) -> Unit
     ) {
         withContext(Dispatchers.IO) {
             try {
-                val countries =
-                    if (forceRefresh || isLocalProductDataOutdated()) getDataFromApiService()
-                    else getDataFromDatabase()
+                val countries: List<Country> = when {
+                    !canFullFillRequest(isNetworkAvailable) -> {
+                        launch(Dispatchers.Main) { onError(Result.Error(AppError.NotConnected)) }
+                        return@withContext
+                    }
+                    forceRefresh || isLocalProductDataOutdated() -> getDataFromApiService()
+                    else -> getDataFromDatabase()
+                }
                 launch(Dispatchers.Main) { onSuccess(Result.Success(countries)) }
             } catch (error: AppError) {
                 launch(Dispatchers.Main) { onError(Result.Error(error)) }
@@ -88,5 +94,9 @@ class CountryRepositoryImpl @Inject constructor(
         countryDao.clearAndInsert(items)
         val currentTime = Clock.System.now().toEpochMilliseconds()
         dataStore.setCountriesPersistenceTimeStamp(currentTime)
+    }
+
+    private suspend fun canFullFillRequest(isNetworkAvailable: Boolean): Boolean {
+        return isNetworkAvailable && !countryDao.isEmpty()
     }
 }

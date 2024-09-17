@@ -15,7 +15,6 @@ class CountryDetailsFragment :
         super.onResume()
         val country = arguments.country
         binding.country = country
-        //viewModel.country = arguments.country
     }
 
     override fun createViewModel() = ViewModelProvider(this)[CountryDetailsViewModel::class.java]

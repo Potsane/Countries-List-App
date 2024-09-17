@@ -11,16 +11,12 @@ import kotlinx.coroutines.launch
 
 open class CountriesAppBaseViewModel : ViewModel() {
 
-    private val _uiCommands = MutableLiveData<Any>().toSingleEvent() as MutableLiveData<Any>
+    private val _uiCommands = MutableLiveData<Any>()//.toSingleEvent() as MutableLiveData<Any>
     val uiCommands: LiveData<Any> = _uiCommands
 
     private val _navigationCommands = MutableLiveData<NavigationCommand>().toSingleEvent()
             as MutableLiveData<NavigationCommand>
     val navigationCommands: LiveData<NavigationCommand> = _navigationCommands
-
-    protected fun postUiCommand(command: Any) {
-        _uiCommands.postValue(command)
-    }
 
     protected fun goBack() {
         _navigationCommands.postValue(NavigationCommand.Back)
