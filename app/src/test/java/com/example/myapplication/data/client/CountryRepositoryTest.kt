@@ -2,11 +2,11 @@ package com.example.myapplication.data.client
 
 import com.example.myapplication.data.local.database.CountryDao
 import com.example.myapplication.data.local.preferences.CountriesAppDataStore
-import com.example.myapplication.data.model.CountriesResponse
-import com.example.myapplication.data.model.Country
+import com.example.myapplication.data.remote.model.CountriesResponse
+import com.example.myapplication.data.remote.model.Country
 import com.example.myapplication.data.remote.CountryApiService
-import com.example.myapplication.domain.model.AppError
-import com.example.myapplication.domain.model.Result
+import com.example.myapplication.domain.repository.model.AppError
+import com.example.myapplication.domain.repository.model.Result
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import kotlinx.coroutines.Dispatchers

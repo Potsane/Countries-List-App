@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.myapplication.presentation.country.CountryListViewModel" />
+            type="com.example.myapplication.presentation.ui.CountryListViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

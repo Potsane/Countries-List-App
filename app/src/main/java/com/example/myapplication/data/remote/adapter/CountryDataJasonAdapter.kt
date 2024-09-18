@@ -1,8 +1,8 @@
 package com.example.myapplication.data.remote.adapter
 
 import android.annotation.SuppressLint
-import com.example.myapplication.data.model.CountriesResponse
-import com.example.myapplication.data.model.Country
+import com.example.myapplication.data.remote.model.CountriesResponse
+import com.example.myapplication.data.remote.model.Country
 import com.squareup.moshi.FromJson
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.JsonReader

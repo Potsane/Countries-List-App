@@ -1,4 +1,4 @@
-package com.example.myapplication.domain.model
+package com.example.myapplication.domain.repository.model
 
 sealed class AppError(private val details: String) : Throwable(details) {
     data object EmptyResponse : AppError("Search Query Returned Nothing")

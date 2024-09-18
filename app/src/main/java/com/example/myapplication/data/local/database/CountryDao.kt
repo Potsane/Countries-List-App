@@ -3,7 +3,7 @@ package com.example.myapplication.data.local.database
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import com.example.myapplication.data.model.Country
+import com.example.myapplication.data.remote.model.Country
 
 @Dao
 interface CountryDao {

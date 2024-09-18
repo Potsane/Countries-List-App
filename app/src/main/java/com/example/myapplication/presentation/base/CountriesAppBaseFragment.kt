@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.myapplication.BR
-import com.example.myapplication.presentation.main.MainActivity
 import com.example.myapplication.presentation.navigation.NavigationCommand
 
 abstract class CountriesAppBaseFragment<VM : CountriesAppBaseViewModel, VB : ViewDataBinding> :

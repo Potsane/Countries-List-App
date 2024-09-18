@@ -1,7 +1,7 @@
-package com.example.myapplication.presentation.country.diffutil
+package com.example.myapplication.presentation.ui.diffutil
 
 import androidx.recyclerview.widget.DiffUtil
-import com.example.myapplication.data.model.Country
+import com.example.myapplication.data.remote.model.Country
 
 class CountryListDiffUtil(
     private val currentItems: List<Country>,

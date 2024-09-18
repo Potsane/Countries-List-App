@@ -1,4 +1,4 @@
-package com.example.myapplication.presentation.country
+package com.example.myapplication.presentation.ui
 
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs

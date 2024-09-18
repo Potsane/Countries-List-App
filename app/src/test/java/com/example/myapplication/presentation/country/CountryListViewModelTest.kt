@@ -2,6 +2,7 @@ package com.example.myapplication.presentation.country
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.example.myapplication.BaseTestRule
+import com.example.myapplication.presentation.ui.CountryListViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse

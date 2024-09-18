@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/CountryListFragment"
-        android:name="com.example.myapplication.presentation.country.CountryListFragment"
+        android:name="com.example.myapplication.presentation.ui.CountryListFragment"
         tools:layout="@layout/fragment_country_list">
         <action
             android:id="@+id/list_to_detail"
@@ -16,13 +16,13 @@
 
     <fragment
         android:id="@+id/CountryDetailsFragment"
-        android:name="com.example.myapplication.presentation.country.CountryDetailsFragment"
+        android:name="com.example.myapplication.presentation.ui.CountryDetailsFragment"
         tools:layout="@layout/fragment_country_details">
         <action
             android:id="@+id/action_CountryDetailsFragment_to_CountryListFragment"
             app:destination="@id/CountryListFragment" />
         <argument
             android:name="country"
-            app:argType="com.example.myapplication.data.model.Country" />
+            app:argType="com.example.myapplication.data.remote.model.Country" />
     </fragment>
 </navigation>

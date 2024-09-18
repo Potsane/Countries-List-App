@@ -1,14 +1,14 @@
-package com.example.myapplication.presentation.country
+package com.example.myapplication.presentation.ui
 
 import android.net.ConnectivityManager
 import android.net.Network
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.myapplication.R
-import com.example.myapplication.data.model.Country
+import com.example.myapplication.data.remote.model.Country
 import com.example.myapplication.databinding.FragmentCountryListBinding
 import com.example.myapplication.presentation.base.CountriesAppBaseFragment
-import com.example.myapplication.presentation.country.adapter.CountryListAdapter
+import com.example.myapplication.presentation.ui.adapter.CountryListAdapter
 import com.example.myapplication.util.network.NetworkMonitor
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
