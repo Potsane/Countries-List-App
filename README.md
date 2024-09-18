@@ -31,11 +31,21 @@ LIST & DETAIL SCREEN
 [List & Detail Screen](https://github.com/user-attachments/assets/faef1e54-2889-460f-8838-5012d9eb7a2e)
 
 OFFLINE MODE
+
 [OFFLINE](https://github.com/user-attachments/assets/f751876d-db0e-4206-86fe-d35676a37225)
 
-
-
 PULL TO REFRESH
+
+[pull_to_refresh.webm](https://github.com/user-attachments/assets/fb01c180-e327-4d58-8043-ee0dd09b84da)
+
+ERROR HANDLING
+
+[ERROR HANDLING](https://github.com/user-attachments/assets/310db008-519f-4073-860b-109a7b7a22c8)
+
+
+
+
+
 
 
 
