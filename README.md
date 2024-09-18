@@ -6,6 +6,10 @@ This is a world countries demo, built with `XML with data-binding`, `Retrofit`, 
 https://restcountries.com/v3.1/all
 ```
 
+## How to run
+Clone repo, open the project on Android Studio, and click run on the toolbar. The app should be run on any device running API Level > 24.
+Tests: Search for the `CountryRepositoryTest` & `CountryListViewModelTest` and run the tests from the Android Studio UI.
+
 ## Artchitecture
 The application uses the MVVM architecture and follows Google’s recommended [guideline](https://developer.android.com/topic/architecture) architecture. The app's overall architecture comprises three layers: the `Presentation Layer`, `Domain Layer`, and `Data Layer`. 
 Each of these has different responsibilities. 
