@@ -7,11 +7,11 @@
 
         <variable
             name="country"
-            type="com.example.myapplication.data.model.Country" />
+            type="com.example.myapplication.data.remote.model.Country" />
 
         <variable
             name="clickListener"
-            type="com.example.myapplication.presentation.listener.CountryCardClickListener " />
+            type="com.example.myapplication.presentation.ui.listener.CountryCardClickListener" />
     </data>
 
     <com.google.android.material.card.MaterialCardView

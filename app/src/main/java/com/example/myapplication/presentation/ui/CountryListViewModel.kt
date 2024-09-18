@@ -1,12 +1,12 @@
-package com.example.myapplication.presentation.country
+package com.example.myapplication.presentation.ui
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.myapplication.data.model.Country
-import com.example.myapplication.domain.model.Result
+import com.example.myapplication.data.remote.model.Country
+import com.example.myapplication.domain.repository.model.Result
 import com.example.myapplication.domain.repository.CountryRepository
 import com.example.myapplication.presentation.base.CountriesAppBaseViewModel
-import com.example.myapplication.presentation.listener.CountryCardClickListener
+import com.example.myapplication.presentation.ui.listener.CountryCardClickListener
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

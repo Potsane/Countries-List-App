@@ -1,4 +1,4 @@
-package com.example.myapplication.data.model
+package com.example.myapplication.data.remote.model
 
 import android.os.Parcelable
 import androidx.room.Entity

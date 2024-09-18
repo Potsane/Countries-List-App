@@ -1,6 +1,6 @@
-package com.example.myapplication.presentation.country
+package com.example.myapplication.presentation.ui
 
-import com.example.myapplication.data.model.Country
+import com.example.myapplication.data.remote.model.Country
 import com.example.myapplication.presentation.base.CountriesAppBaseViewModel
 
 class CountryDetailsViewModel : CountriesAppBaseViewModel() {

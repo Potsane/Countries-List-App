@@ -1,4 +1,4 @@
-package com.example.myapplication.presentation.country.adapter
+package com.example.myapplication.presentation.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,11 +7,11 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
-import com.example.myapplication.data.model.Country
+import com.example.myapplication.data.remote.model.Country
 import com.example.myapplication.databinding.ItemCountryCardBinding
-import com.example.myapplication.presentation.listener.CountryCardClickListener
+import com.example.myapplication.presentation.ui.listener.CountryCardClickListener
 import com.example.myapplication.BR
-import com.example.myapplication.presentation.country.diffutil.CountryListDiffUtil
+import com.example.myapplication.presentation.ui.diffutil.CountryListDiffUtil
 
 class CountryListAdapter(
     private val countries : MutableList<Country>,

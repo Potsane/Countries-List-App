@@ -1,4 +1,4 @@
-package com.example.myapplication.presentation.country
+package com.example.myapplication.presentation.ui
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.example.myapplication.BaseTestRule

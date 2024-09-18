@@ -7,7 +7,7 @@
 
         <variable
             name="country"
-            type="com.example.myapplication.data.model.Country" />
+            type="com.example.myapplication.data.remote.model.Country" />
     </data>
 
     <ScrollView

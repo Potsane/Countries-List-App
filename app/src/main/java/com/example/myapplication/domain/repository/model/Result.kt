@@ -1,4 +1,4 @@
-package com.example.myapplication.domain.model
+package com.example.myapplication.domain.repository.model
 
 sealed interface Result<out T> {
     class Success<T>(val data: T) : Result<T>
