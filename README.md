@@ -26,6 +26,9 @@ This contains, the network API service calls implemented with the assistance of 
 ![Screenshot 2024-09-18 at 09 23 26](https://github.com/user-attachments/assets/5251c06d-b57e-4b46-997e-473a5d74aed2)
 
 ### ILLUSTRATIONS
+UNIT TESTS
+These are uni tests, `CountryRepositoryTest` & `CountryListViewModelTest`
+
 LIST & DETAIL SCREEN
 
 [List & Detail Screen](https://github.com/user-attachments/assets/faef1e54-2889-460f-8838-5012d9eb7a2e)
